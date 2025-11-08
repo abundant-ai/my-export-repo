@@ -1,0 +1,81 @@
+{
+    "id": "ce7b22f4-c12a-4034-bc6a-dbbdaf13a54d",
+    "task_name": "api-change-guard",
+    "trial_name": "api-change-guard__rjkEhXH",
+    "trial_uri": "file:///home/runner/_work/nov-5-export/nov-5-export/jobs/2025-11-08__12-23-35/api-change-guard__rjkEhXH",
+    "task_id": {
+        "path": "tasks/api-change-guard"
+    },
+    "source": "tasks",
+    "task_checksum": "89d93d932bcf54e4884812dd327df989044dc45a4d77c88592b283d76c5f7bb0",
+    "config": {
+        "task": {
+            "path": "tasks/api-change-guard",
+            "git_url": null,
+            "git_commit_id": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "tasks"
+        },
+        "trial_name": "api-change-guard__rjkEhXH",
+        "trials_dir": "jobs/2025-11-08__12-23-35",
+        "timeout_multiplier": 1.0,
+        "agent": {
+            "name": "gemini-cli",
+            "import_path": null,
+            "model_name": "gemini/gemini-2.5-pro",
+            "override_timeout_sec": null,
+            "kwargs": {}
+        },
+        "environment": {
+            "type": "docker",
+            "force_build": false,
+            "delete": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null
+        },
+        "job_id": "8b65e3a2-47a9-45b1-8ca8-f13ace0f1be2"
+    },
+    "agent_info": {
+        "name": "gemini-cli",
+        "version": "unknown",
+        "model_info": {
+            "name": "gemini-2.5-pro",
+            "provider": "gemini"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 109347,
+        "n_cache_tokens": 49549,
+        "n_output_tokens": 12027,
+        "cost_usd": null,
+        "output_logprobs": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2025-11-08T12:23:35.334267",
+    "finished_at": "2025-11-08T12:26:32.306904",
+    "environment_setup": {
+        "started_at": "2025-11-08T12:23:35.335038",
+        "finished_at": "2025-11-08T12:23:47.371982"
+    },
+    "agent_setup": {
+        "started_at": "2025-11-08T12:23:47.372011",
+        "finished_at": "2025-11-08T12:24:34.328230"
+    },
+    "agent_execution": {
+        "started_at": "2025-11-08T12:24:34.328260",
+        "finished_at": "2025-11-08T12:26:19.721777"
+    },
+    "verifier": {
+        "started_at": "2025-11-08T12:26:19.723270",
+        "finished_at": "2025-11-08T12:26:20.773365"
+    }
+}

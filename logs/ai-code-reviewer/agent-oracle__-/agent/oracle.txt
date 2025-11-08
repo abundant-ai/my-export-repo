@@ -1,0 +1,7 @@
+Advanced Code Review Complete!
+Files reviewed: 3
+Overall score: 1/10
+Total issues: 24
+Complexity score: 8.6/10
+Security score: 1.0/10
+Maintainability score: 10.0/10

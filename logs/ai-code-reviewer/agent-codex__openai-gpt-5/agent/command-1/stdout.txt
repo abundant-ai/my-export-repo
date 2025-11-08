@@ -1,0 +1,11 @@
+bash: cannot set terminal process group (-1): Inappropriate ioctl for device
+bash: no job control in this shell
+{"type":"thread.started","thread_id":"019a62d1-c950-71f0-baa9-a6f601eec322"}
+{"type":"turn.started"}
+{"type":"error","message":"Reconnecting... 1/5"}
+{"type":"error","message":"Reconnecting... 2/5"}
+{"type":"error","message":"Reconnecting... 3/5"}
+{"type":"error","message":"Reconnecting... 4/5"}
+{"type":"error","message":"Reconnecting... 5/5"}
+{"type":"error","message":"exceeded retry limit, last status: 401 Unauthorized, request id: 99b414ba08df01d9-LAX"}
+{"type":"turn.failed","error":{"message":"exceeded retry limit, last status: 401 Unauthorized, request id: 99b414ba08df01d9-LAX"}}

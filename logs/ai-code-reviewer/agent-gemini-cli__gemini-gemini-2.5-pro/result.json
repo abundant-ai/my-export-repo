@@ -1,0 +1,86 @@
+{
+    "id": "b489542c-5fbe-4eb2-a31e-57853704e815",
+    "task_name": "ai-code-reviewer",
+    "trial_name": "ai-code-reviewer__NnNJhmQ",
+    "trial_uri": "file:///home/runner/_work/nov-5-export/nov-5-export/jobs/2025-11-08__09-34-26/ai-code-reviewer__NnNJhmQ",
+    "task_id": {
+        "path": "tasks/ai-code-reviewer"
+    },
+    "source": "tasks",
+    "task_checksum": "d8c23c3e698f4eb749836a6dde6a7839b5a3e3d3a6459458543818a1339d0436",
+    "config": {
+        "task": {
+            "path": "tasks/ai-code-reviewer",
+            "git_url": null,
+            "git_commit_id": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "tasks"
+        },
+        "trial_name": "ai-code-reviewer__NnNJhmQ",
+        "trials_dir": "jobs/2025-11-08__09-34-26",
+        "timeout_multiplier": 1.0,
+        "agent": {
+            "name": "gemini-cli",
+            "import_path": null,
+            "model_name": "gemini/gemini-2.5-pro",
+            "override_timeout_sec": null,
+            "kwargs": {}
+        },
+        "environment": {
+            "type": "docker",
+            "force_build": false,
+            "delete": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null
+        },
+        "job_id": "0440e6ea-80f6-4060-9ecd-abc158d2267a"
+    },
+    "agent_info": {
+        "name": "gemini-cli",
+        "version": "unknown",
+        "model_info": {
+            "name": "gemini-2.5-pro",
+            "provider": "gemini"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 1498091,
+        "n_cache_tokens": 1296980,
+        "n_output_tokens": 18418,
+        "cost_usd": null,
+        "output_logprobs": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": {
+        "exception_type": "AgentTimeoutError",
+        "exception_message": "Agent execution timed out after 360.0 seconds",
+        "exception_traceback": "Traceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/asyncio/tasks.py\", line 520, in wait_for\n    return await fut\n           ^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/harbor/agents/installed/gemini_cli.py\", line 268, in run\n    await super().run(instruction, environment, context)\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/harbor/agents/installed/base.py\", line 135, in run\n    result = await environment.exec(\n             ^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/harbor/environments/docker/docker.py\", line 261, in exec\n    return await self._run_docker_compose_command(\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/harbor/environments/docker/docker.py\", line 144, in _run_docker_compose_command\n    stdout_bytes, stderr_bytes = await process.communicate()\n                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/asyncio/subprocess.py\", line 201, in communicate\n    stdin, stdout, stderr = await tasks.gather(stdin, stdout, stderr)\n                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/asyncio/subprocess.py\", line 181, in _read_stream\n    output = await stream.read()\n             ^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/asyncio/streams.py\", line 706, in read\n    block = await self.read(self._limit)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/asyncio/streams.py\", line 713, in read\n    await self._wait_for_data('read')\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/asyncio/streams.py\", line 545, in _wait_for_data\n    await self._waiter\nasyncio.exceptions.CancelledError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/harbor/trial/trial.py\", line 210, in _execute_agent\n    await asyncio.wait_for(\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/asyncio/tasks.py\", line 519, in wait_for\n    async with timeouts.timeout(timeout):\n               ^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/asyncio/timeouts.py\", line 115, in __aexit__\n    raise TimeoutError from exc_val\nTimeoutError\n\nThe above exception was the direct cause of the following exception:\n\nTraceback (most recent call last):\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/harbor/trial/trial.py\", line 326, in run\n    await self._execute_agent()\n  File \"/opt/hostedtoolcache/Python/3.12.11/x64/lib/python3.12/site-packages/harbor/trial/trial.py\", line 219, in _execute_agent\n    raise AgentTimeoutError(\nharbor.trial.trial.AgentTimeoutError: Agent execution timed out after 360.0 seconds\n",
+        "occurred_at": "2025-11-08T09:41:20.674405"
+    },
+    "started_at": "2025-11-08T09:34:26.118167",
+    "finished_at": "2025-11-08T09:41:32.933101",
+    "environment_setup": {
+        "started_at": "2025-11-08T09:34:26.118651",
+        "finished_at": "2025-11-08T09:34:46.494134"
+    },
+    "agent_setup": {
+        "started_at": "2025-11-08T09:34:46.494174",
+        "finished_at": "2025-11-08T09:35:20.244094"
+    },
+    "agent_execution": {
+        "started_at": "2025-11-08T09:35:20.244129",
+        "finished_at": "2025-11-08T09:41:20.671700"
+    },
+    "verifier": {
+        "started_at": "2025-11-08T09:41:20.682029",
+        "finished_at": "2025-11-08T09:41:21.399017"
+    }
+}

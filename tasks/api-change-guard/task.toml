@@ -1,0 +1,21 @@
+version = "1.0"
+
+[metadata]
+author_name = "unknown"
+author_email = "unknown"
+difficulty = "hard"
+category = "software-engineering"
+tags = [ "openapi", "regression", "semver", "api", "python", "ci",]
+
+[verifier]
+timeout_sec = 360.0
+
+[agent]
+timeout_sec = 360.0
+
+[environment]
+docker_image = "ghcr.io/abundant-ai/nov-5-export/api-change-guard:pr-93"
+build_timeout_sec = 600.0
+cpus = 1
+memory = "2G"
+storage = "4G"

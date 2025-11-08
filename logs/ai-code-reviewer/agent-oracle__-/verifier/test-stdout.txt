@@ -1,0 +1,27 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0
+rootdir: /tests
+collected 17 items
+
+test_outputs.py .................                                        [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED test_outputs.py::test_code_review_json_exists
+PASSED test_outputs.py::test_enhanced_json_structure
+PASSED test_outputs.py::test_statistics_structure
+PASSED test_outputs.py::test_findings_structure
+PASSED test_outputs.py::test_score_ranges
+PASSED test_outputs.py::test_fix_confidence_range
+PASSED test_outputs.py::test_severity_values
+PASSED test_outputs.py::test_category_values
+PASSED test_outputs.py::test_complexity_impact_values
+PASSED test_outputs.py::test_detects_multiple_categories
+PASSED test_outputs.py::test_detects_security_issues
+PASSED test_outputs.py::test_detects_naming_issues
+PASSED test_outputs.py::test_detects_design_issues
+PASSED test_outputs.py::test_total_issues_consistency
+PASSED test_outputs.py::test_statistics_consistency
+PASSED test_outputs.py::test_files_reviewed
+PASSED test_outputs.py::test_complexity_metrics
+============================== 17 passed in 0.02s ==============================

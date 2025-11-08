@@ -1,0 +1,215 @@
+============================= test session starts ==============================
+platform linux -- Python 3.11.14, pytest-8.4.2, pluggy-1.6.0
+rootdir: /tests
+collected 17 items
+
+test_outputs.py FFFFFFFFFFFFFFFFF                                        [100%]
+
+=================================== FAILURES ===================================
+_________________________ test_code_review_json_exists _________________________
+
+    def test_code_review_json_exists():
+        """Test that code review JSON file is created"""
+        review_path = Path("/app/code_review.json")
+>       assert review_path.exists(), "code_review.json should exist in /app"
+E       AssertionError: code_review.json should exist in /app
+E       assert False
+E        +  where False = exists()
+E        +    where exists = PosixPath('/app/code_review.json').exists
+
+test_outputs.py:8: AssertionError
+_________________________ test_enhanced_json_structure _________________________
+
+    def test_enhanced_json_structure():
+        """Test that code review JSON has enhanced structure with all required fields"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:15: FileNotFoundError
+__________________________ test_statistics_structure ___________________________
+
+    def test_statistics_structure():
+        """Test that statistics section has required fields with correct types"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:46: FileNotFoundError
+___________________________ test_findings_structure ____________________________
+
+    def test_findings_structure():
+        """Test that findings have correct structure with all required fields"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:73: FileNotFoundError
+______________________________ test_score_ranges _______________________________
+
+    def test_score_ranges():
+        """Test that all scores are within valid ranges"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:109: FileNotFoundError
+__________________________ test_fix_confidence_range ___________________________
+
+    def test_fix_confidence_range():
+        """Test that fix confidence scores are within 0-1 range"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:130: FileNotFoundError
+_____________________________ test_severity_values _____________________________
+
+    def test_severity_values():
+        """Test that severity values are valid"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:144: FileNotFoundError
+_____________________________ test_category_values _____________________________
+
+    def test_category_values():
+        """Test that category values are valid"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:158: FileNotFoundError
+________________________ test_complexity_impact_values _________________________
+
+    def test_complexity_impact_values():
+        """Test that complexity_impact values are valid"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:175: FileNotFoundError
+_______________________ test_detects_multiple_categories _______________________
+
+    def test_detects_multiple_categories():
+        """Test that reviewer detects issues across multiple categories"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:189: FileNotFoundError
+_________________________ test_detects_security_issues _________________________
+
+    def test_detects_security_issues():
+        """Test that security vulnerabilities are detected"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:205: FileNotFoundError
+__________________________ test_detects_naming_issues __________________________
+
+    def test_detects_naming_issues():
+        """Test that naming convention violations are detected"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:219: FileNotFoundError
+__________________________ test_detects_design_issues __________________________
+
+    def test_detects_design_issues():
+        """Test that design/complexity issues are detected"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:233: FileNotFoundError
+________________________ test_total_issues_consistency _________________________
+
+    def test_total_issues_consistency():
+        """Test that total_issues matches findings count"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:252: FileNotFoundError
+_________________________ test_statistics_consistency __________________________
+
+    def test_statistics_consistency():
+        """Test that statistics counts match findings"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:264: FileNotFoundError
+_____________________________ test_files_reviewed ______________________________
+
+    def test_files_reviewed():
+        """Test that files_reviewed count is correct"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:289: FileNotFoundError
+___________________________ test_complexity_metrics ____________________________
+
+    def test_complexity_metrics():
+        """Test that complexity metrics are calculated"""
+        review_path = Path("/app/code_review.json")
+    
+>       with open(review_path, 'r', encoding='utf-8') as f:
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       FileNotFoundError: [Errno 2] No such file or directory: '/app/code_review.json'
+
+test_outputs.py:307: FileNotFoundError
+=========================== short test summary info ============================
+FAILED test_outputs.py::test_code_review_json_exists - AssertionError: code_r...
+FAILED test_outputs.py::test_enhanced_json_structure - FileNotFoundError: [Er...
+FAILED test_outputs.py::test_statistics_structure - FileNotFoundError: [Errno...
+FAILED test_outputs.py::test_findings_structure - FileNotFoundError: [Errno 2...
+FAILED test_outputs.py::test_score_ranges - FileNotFoundError: [Errno 2] No s...
+FAILED test_outputs.py::test_fix_confidence_range - FileNotFoundError: [Errno...
+FAILED test_outputs.py::test_severity_values - FileNotFoundError: [Errno 2] N...
+FAILED test_outputs.py::test_category_values - FileNotFoundError: [Errno 2] N...
+FAILED test_outputs.py::test_complexity_impact_values - FileNotFoundError: [E...
+FAILED test_outputs.py::test_detects_multiple_categories - FileNotFoundError:...
+FAILED test_outputs.py::test_detects_security_issues - FileNotFoundError: [Er...
+FAILED test_outputs.py::test_detects_naming_issues - FileNotFoundError: [Errn...
+FAILED test_outputs.py::test_detects_design_issues - FileNotFoundError: [Errn...
+FAILED test_outputs.py::test_total_issues_consistency - FileNotFoundError: [E...
+FAILED test_outputs.py::test_statistics_consistency - FileNotFoundError: [Err...
+FAILED test_outputs.py::test_files_reviewed - FileNotFoundError: [Errno 2] No...
+FAILED test_outputs.py::test_complexity_metrics - FileNotFoundError: [Errno 2...
+============================== 17 failed in 0.07s ==============================

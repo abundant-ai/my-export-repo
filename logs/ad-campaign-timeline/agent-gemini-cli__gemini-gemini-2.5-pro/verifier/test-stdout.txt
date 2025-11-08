@@ -1,0 +1,552 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.12, pytest-8.2.2, pluggy-1.6.0 -- /usr/local/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /tests
+collecting ... collected 9 items
+
+../tests/test_timeline.py::test_timeline_aligns_with_pause_resume_and_budget_overrides ERROR [ 11%]
+../tests/test_timeline.py::test_end_override_truncates_flight_window ERROR [ 22%]
+../tests/test_timeline.py::test_all_flights_present_each_day_until_end ERROR [ 33%]
+../tests/test_timeline.py::test_multiple_overrides_use_latest_event_per_day ERROR [ 44%]
+../tests/test_timeline.py::test_paused_days_ignore_budget_overrides ERROR [ 55%]
+../tests/test_timeline.py::test_timezone_conversion_affects_budget_day ERROR [ 66%]
+../tests/test_timeline.py::test_flights_sorted_alphabetically_each_day ERROR [ 77%]
+../tests/test_timeline.py::test_daily_spend_caps_enforced ERROR          [ 88%]
+../tests/test_timeline.py::test_inputs_not_mutated FAILED                [100%]
+
+==================================== ERRORS ====================================
+_ ERROR at setup of test_timeline_aligns_with_pause_resume_and_budget_overrides _
+
+scenario = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    @pytest.fixture(scope="module")
+    def timeline(scenario):
+>       return _run_timeline(scenario)
+
+/tests/test_timeline.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def _run_timeline(payload: dict) -> list[dict]:
+        script = _resolve(TASK_DIR / "campaign" / "aggregator.js")
+        script_ref = json.dumps(str(script))
+        payload_literal = json.dumps(payload)
+        node_snippet = f"""
+    const aggregator = require({script_ref});
+    const payload = {payload_literal};
+    const output = aggregator.computeTimeline(payload);
+    process.stdout.write(JSON.stringify(output));
+    """
+        completed = subprocess.run(
+            ["node", "-e", node_snippet],
+            capture_output=True,
+            text=True,
+            cwd=TASK_DIR,
+        )
+        if completed.returncode != 0:
+>           raise RuntimeError(
+                f"Node execution failed: {completed.stderr.strip() or completed.stdout}"
+            )
+E           RuntimeError: Node execution failed: node:internal/modules/cjs/loader:1386
+E             throw err;
+E             ^
+E           
+E           Error: Cannot find module 'date-fns-tz'
+E           Require stack:
+E           - /app/campaign/aggregator.js
+E           - /[eval]
+E               at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+E               at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+E               at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+E               at Function._load (node:internal/modules/cjs/loader:1192:37)
+E               at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+E               at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+E               at Module.require (node:internal/modules/cjs/loader:1463:12)
+E               at require (node:internal/modules/helpers:147:16)
+E               at Object.<anonymous> (/app/campaign/aggregator.js:1:48)
+E               at Module._compile (node:internal/modules/cjs/loader:1706:14) {
+E             code: 'MODULE_NOT_FOUND',
+E             requireStack: [ '/app/campaign/aggregator.js', '/[eval]' ]
+E           }
+E           
+E           Node.js v22.21.1
+
+/tests/test_timeline.py:44: RuntimeError
+_________ ERROR at setup of test_end_override_truncates_flight_window __________
+
+scenario = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    @pytest.fixture(scope="module")
+    def timeline(scenario):
+>       return _run_timeline(scenario)
+
+/tests/test_timeline.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def _run_timeline(payload: dict) -> list[dict]:
+        script = _resolve(TASK_DIR / "campaign" / "aggregator.js")
+        script_ref = json.dumps(str(script))
+        payload_literal = json.dumps(payload)
+        node_snippet = f"""
+    const aggregator = require({script_ref});
+    const payload = {payload_literal};
+    const output = aggregator.computeTimeline(payload);
+    process.stdout.write(JSON.stringify(output));
+    """
+        completed = subprocess.run(
+            ["node", "-e", node_snippet],
+            capture_output=True,
+            text=True,
+            cwd=TASK_DIR,
+        )
+        if completed.returncode != 0:
+>           raise RuntimeError(
+                f"Node execution failed: {completed.stderr.strip() or completed.stdout}"
+            )
+E           RuntimeError: Node execution failed: node:internal/modules/cjs/loader:1386
+E             throw err;
+E             ^
+E           
+E           Error: Cannot find module 'date-fns-tz'
+E           Require stack:
+E           - /app/campaign/aggregator.js
+E           - /[eval]
+E               at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+E               at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+E               at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+E               at Function._load (node:internal/modules/cjs/loader:1192:37)
+E               at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+E               at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+E               at Module.require (node:internal/modules/cjs/loader:1463:12)
+E               at require (node:internal/modules/helpers:147:16)
+E               at Object.<anonymous> (/app/campaign/aggregator.js:1:48)
+E               at Module._compile (node:internal/modules/cjs/loader:1706:14) {
+E             code: 'MODULE_NOT_FOUND',
+E             requireStack: [ '/app/campaign/aggregator.js', '/[eval]' ]
+E           }
+E           
+E           Node.js v22.21.1
+
+/tests/test_timeline.py:44: RuntimeError
+________ ERROR at setup of test_all_flights_present_each_day_until_end _________
+
+scenario = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    @pytest.fixture(scope="module")
+    def timeline(scenario):
+>       return _run_timeline(scenario)
+
+/tests/test_timeline.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def _run_timeline(payload: dict) -> list[dict]:
+        script = _resolve(TASK_DIR / "campaign" / "aggregator.js")
+        script_ref = json.dumps(str(script))
+        payload_literal = json.dumps(payload)
+        node_snippet = f"""
+    const aggregator = require({script_ref});
+    const payload = {payload_literal};
+    const output = aggregator.computeTimeline(payload);
+    process.stdout.write(JSON.stringify(output));
+    """
+        completed = subprocess.run(
+            ["node", "-e", node_snippet],
+            capture_output=True,
+            text=True,
+            cwd=TASK_DIR,
+        )
+        if completed.returncode != 0:
+>           raise RuntimeError(
+                f"Node execution failed: {completed.stderr.strip() or completed.stdout}"
+            )
+E           RuntimeError: Node execution failed: node:internal/modules/cjs/loader:1386
+E             throw err;
+E             ^
+E           
+E           Error: Cannot find module 'date-fns-tz'
+E           Require stack:
+E           - /app/campaign/aggregator.js
+E           - /[eval]
+E               at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+E               at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+E               at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+E               at Function._load (node:internal/modules/cjs/loader:1192:37)
+E               at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+E               at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+E               at Module.require (node:internal/modules/cjs/loader:1463:12)
+E               at require (node:internal/modules/helpers:147:16)
+E               at Object.<anonymous> (/app/campaign/aggregator.js:1:48)
+E               at Module._compile (node:internal/modules/cjs/loader:1706:14) {
+E             code: 'MODULE_NOT_FOUND',
+E             requireStack: [ '/app/campaign/aggregator.js', '/[eval]' ]
+E           }
+E           
+E           Node.js v22.21.1
+
+/tests/test_timeline.py:44: RuntimeError
+______ ERROR at setup of test_multiple_overrides_use_latest_event_per_day ______
+
+scenario = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    @pytest.fixture(scope="module")
+    def timeline(scenario):
+>       return _run_timeline(scenario)
+
+/tests/test_timeline.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def _run_timeline(payload: dict) -> list[dict]:
+        script = _resolve(TASK_DIR / "campaign" / "aggregator.js")
+        script_ref = json.dumps(str(script))
+        payload_literal = json.dumps(payload)
+        node_snippet = f"""
+    const aggregator = require({script_ref});
+    const payload = {payload_literal};
+    const output = aggregator.computeTimeline(payload);
+    process.stdout.write(JSON.stringify(output));
+    """
+        completed = subprocess.run(
+            ["node", "-e", node_snippet],
+            capture_output=True,
+            text=True,
+            cwd=TASK_DIR,
+        )
+        if completed.returncode != 0:
+>           raise RuntimeError(
+                f"Node execution failed: {completed.stderr.strip() or completed.stdout}"
+            )
+E           RuntimeError: Node execution failed: node:internal/modules/cjs/loader:1386
+E             throw err;
+E             ^
+E           
+E           Error: Cannot find module 'date-fns-tz'
+E           Require stack:
+E           - /app/campaign/aggregator.js
+E           - /[eval]
+E               at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+E               at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+E               at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+E               at Function._load (node:internal/modules/cjs/loader:1192:37)
+E               at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+E               at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+E               at Module.require (node:internal/modules/cjs/loader:1463:12)
+E               at require (node:internal/modules/helpers:147:16)
+E               at Object.<anonymous> (/app/campaign/aggregator.js:1:48)
+E               at Module._compile (node:internal/modules/cjs/loader:1706:14) {
+E             code: 'MODULE_NOT_FOUND',
+E             requireStack: [ '/app/campaign/aggregator.js', '/[eval]' ]
+E           }
+E           
+E           Node.js v22.21.1
+
+/tests/test_timeline.py:44: RuntimeError
+__________ ERROR at setup of test_paused_days_ignore_budget_overrides __________
+
+scenario = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    @pytest.fixture(scope="module")
+    def timeline(scenario):
+>       return _run_timeline(scenario)
+
+/tests/test_timeline.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def _run_timeline(payload: dict) -> list[dict]:
+        script = _resolve(TASK_DIR / "campaign" / "aggregator.js")
+        script_ref = json.dumps(str(script))
+        payload_literal = json.dumps(payload)
+        node_snippet = f"""
+    const aggregator = require({script_ref});
+    const payload = {payload_literal};
+    const output = aggregator.computeTimeline(payload);
+    process.stdout.write(JSON.stringify(output));
+    """
+        completed = subprocess.run(
+            ["node", "-e", node_snippet],
+            capture_output=True,
+            text=True,
+            cwd=TASK_DIR,
+        )
+        if completed.returncode != 0:
+>           raise RuntimeError(
+                f"Node execution failed: {completed.stderr.strip() or completed.stdout}"
+            )
+E           RuntimeError: Node execution failed: node:internal/modules/cjs/loader:1386
+E             throw err;
+E             ^
+E           
+E           Error: Cannot find module 'date-fns-tz'
+E           Require stack:
+E           - /app/campaign/aggregator.js
+E           - /[eval]
+E               at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+E               at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+E               at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+E               at Function._load (node:internal/modules/cjs/loader:1192:37)
+E               at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+E               at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+E               at Module.require (node:internal/modules/cjs/loader:1463:12)
+E               at require (node:internal/modules/helpers:147:16)
+E               at Object.<anonymous> (/app/campaign/aggregator.js:1:48)
+E               at Module._compile (node:internal/modules/cjs/loader:1706:14) {
+E             code: 'MODULE_NOT_FOUND',
+E             requireStack: [ '/app/campaign/aggregator.js', '/[eval]' ]
+E           }
+E           
+E           Node.js v22.21.1
+
+/tests/test_timeline.py:44: RuntimeError
+________ ERROR at setup of test_timezone_conversion_affects_budget_day _________
+
+scenario = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    @pytest.fixture(scope="module")
+    def timeline(scenario):
+>       return _run_timeline(scenario)
+
+/tests/test_timeline.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def _run_timeline(payload: dict) -> list[dict]:
+        script = _resolve(TASK_DIR / "campaign" / "aggregator.js")
+        script_ref = json.dumps(str(script))
+        payload_literal = json.dumps(payload)
+        node_snippet = f"""
+    const aggregator = require({script_ref});
+    const payload = {payload_literal};
+    const output = aggregator.computeTimeline(payload);
+    process.stdout.write(JSON.stringify(output));
+    """
+        completed = subprocess.run(
+            ["node", "-e", node_snippet],
+            capture_output=True,
+            text=True,
+            cwd=TASK_DIR,
+        )
+        if completed.returncode != 0:
+>           raise RuntimeError(
+                f"Node execution failed: {completed.stderr.strip() or completed.stdout}"
+            )
+E           RuntimeError: Node execution failed: node:internal/modules/cjs/loader:1386
+E             throw err;
+E             ^
+E           
+E           Error: Cannot find module 'date-fns-tz'
+E           Require stack:
+E           - /app/campaign/aggregator.js
+E           - /[eval]
+E               at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+E               at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+E               at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+E               at Function._load (node:internal/modules/cjs/loader:1192:37)
+E               at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+E               at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+E               at Module.require (node:internal/modules/cjs/loader:1463:12)
+E               at require (node:internal/modules/helpers:147:16)
+E               at Object.<anonymous> (/app/campaign/aggregator.js:1:48)
+E               at Module._compile (node:internal/modules/cjs/loader:1706:14) {
+E             code: 'MODULE_NOT_FOUND',
+E             requireStack: [ '/app/campaign/aggregator.js', '/[eval]' ]
+E           }
+E           
+E           Node.js v22.21.1
+
+/tests/test_timeline.py:44: RuntimeError
+________ ERROR at setup of test_flights_sorted_alphabetically_each_day _________
+
+scenario = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    @pytest.fixture(scope="module")
+    def timeline(scenario):
+>       return _run_timeline(scenario)
+
+/tests/test_timeline.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def _run_timeline(payload: dict) -> list[dict]:
+        script = _resolve(TASK_DIR / "campaign" / "aggregator.js")
+        script_ref = json.dumps(str(script))
+        payload_literal = json.dumps(payload)
+        node_snippet = f"""
+    const aggregator = require({script_ref});
+    const payload = {payload_literal};
+    const output = aggregator.computeTimeline(payload);
+    process.stdout.write(JSON.stringify(output));
+    """
+        completed = subprocess.run(
+            ["node", "-e", node_snippet],
+            capture_output=True,
+            text=True,
+            cwd=TASK_DIR,
+        )
+        if completed.returncode != 0:
+>           raise RuntimeError(
+                f"Node execution failed: {completed.stderr.strip() or completed.stdout}"
+            )
+E           RuntimeError: Node execution failed: node:internal/modules/cjs/loader:1386
+E             throw err;
+E             ^
+E           
+E           Error: Cannot find module 'date-fns-tz'
+E           Require stack:
+E           - /app/campaign/aggregator.js
+E           - /[eval]
+E               at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+E               at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+E               at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+E               at Function._load (node:internal/modules/cjs/loader:1192:37)
+E               at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+E               at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+E               at Module.require (node:internal/modules/cjs/loader:1463:12)
+E               at require (node:internal/modules/helpers:147:16)
+E               at Object.<anonymous> (/app/campaign/aggregator.js:1:48)
+E               at Module._compile (node:internal/modules/cjs/loader:1706:14) {
+E             code: 'MODULE_NOT_FOUND',
+E             requireStack: [ '/app/campaign/aggregator.js', '/[eval]' ]
+E           }
+E           
+E           Node.js v22.21.1
+
+/tests/test_timeline.py:44: RuntimeError
+_______________ ERROR at setup of test_daily_spend_caps_enforced _______________
+
+scenario = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    @pytest.fixture(scope="module")
+    def timeline(scenario):
+>       return _run_timeline(scenario)
+
+/tests/test_timeline.py:57: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def _run_timeline(payload: dict) -> list[dict]:
+        script = _resolve(TASK_DIR / "campaign" / "aggregator.js")
+        script_ref = json.dumps(str(script))
+        payload_literal = json.dumps(payload)
+        node_snippet = f"""
+    const aggregator = require({script_ref});
+    const payload = {payload_literal};
+    const output = aggregator.computeTimeline(payload);
+    process.stdout.write(JSON.stringify(output));
+    """
+        completed = subprocess.run(
+            ["node", "-e", node_snippet],
+            capture_output=True,
+            text=True,
+            cwd=TASK_DIR,
+        )
+        if completed.returncode != 0:
+>           raise RuntimeError(
+                f"Node execution failed: {completed.stderr.strip() or completed.stdout}"
+            )
+E           RuntimeError: Node execution failed: node:internal/modules/cjs/loader:1386
+E             throw err;
+E             ^
+E           
+E           Error: Cannot find module 'date-fns-tz'
+E           Require stack:
+E           - /app/campaign/aggregator.js
+E           - /[eval]
+E               at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+E               at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+E               at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+E               at Function._load (node:internal/modules/cjs/loader:1192:37)
+E               at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+E               at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+E               at Module.require (node:internal/modules/cjs/loader:1463:12)
+E               at require (node:internal/modules/helpers:147:16)
+E               at Object.<anonymous> (/app/campaign/aggregator.js:1:48)
+E               at Module._compile (node:internal/modules/cjs/loader:1706:14) {
+E             code: 'MODULE_NOT_FOUND',
+E             requireStack: [ '/app/campaign/aggregator.js', '/[eval]' ]
+E           }
+E           
+E           Node.js v22.21.1
+
+/tests/test_timeline.py:44: RuntimeError
+=================================== FAILURES ===================================
+___________________________ test_inputs_not_mutated ____________________________
+
+scenario = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def test_inputs_not_mutated(scenario):
+        """computeTimeline must not mutate the provided scenario payload."""
+        snapshot = deepcopy(scenario)
+>       _run_timeline(scenario)
+
+/tests/test_timeline.py:158: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+payload = {'adjustments': [{'flightId': 'flightA', 'timestamp': '2024-07-02T08:00:00-04:00', 'type': 'budget_override', 'value':...baseBudget': 80, 'endDate': '2024-07-08', 'id': 'flightC', 'startDate': '2024-07-05'}], 'timezone': 'America/New_York'}
+
+    def _run_timeline(payload: dict) -> list[dict]:
+        script = _resolve(TASK_DIR / "campaign" / "aggregator.js")
+        script_ref = json.dumps(str(script))
+        payload_literal = json.dumps(payload)
+        node_snippet = f"""
+    const aggregator = require({script_ref});
+    const payload = {payload_literal};
+    const output = aggregator.computeTimeline(payload);
+    process.stdout.write(JSON.stringify(output));
+    """
+        completed = subprocess.run(
+            ["node", "-e", node_snippet],
+            capture_output=True,
+            text=True,
+            cwd=TASK_DIR,
+        )
+        if completed.returncode != 0:
+>           raise RuntimeError(
+                f"Node execution failed: {completed.stderr.strip() or completed.stdout}"
+            )
+E           RuntimeError: Node execution failed: node:internal/modules/cjs/loader:1386
+E             throw err;
+E             ^
+E           
+E           Error: Cannot find module 'date-fns-tz'
+E           Require stack:
+E           - /app/campaign/aggregator.js
+E           - /[eval]
+E               at Function._resolveFilename (node:internal/modules/cjs/loader:1383:15)
+E               at defaultResolveImpl (node:internal/modules/cjs/loader:1025:19)
+E               at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1030:22)
+E               at Function._load (node:internal/modules/cjs/loader:1192:37)
+E               at TracingChannel.traceSync (node:diagnostics_channel:328:14)
+E               at wrapModuleLoad (node:internal/modules/cjs/loader:237:24)
+E               at Module.require (node:internal/modules/cjs/loader:1463:12)
+E               at require (node:internal/modules/helpers:147:16)
+E               at Object.<anonymous> (/app/campaign/aggregator.js:1:48)
+E               at Module._compile (node:internal/modules/cjs/loader:1706:14) {
+E             code: 'MODULE_NOT_FOUND',
+E             requireStack: [ '/app/campaign/aggregator.js', '/[eval]' ]
+E           }
+E           
+E           Node.js v22.21.1
+
+/tests/test_timeline.py:44: RuntimeError
+=========================== short test summary info ============================
+ERROR ../tests/test_timeline.py::test_timeline_aligns_with_pause_resume_and_budget_overrides
+ERROR ../tests/test_timeline.py::test_end_override_truncates_flight_window - ...
+ERROR ../tests/test_timeline.py::test_all_flights_present_each_day_until_end
+ERROR ../tests/test_timeline.py::test_multiple_overrides_use_latest_event_per_day
+ERROR ../tests/test_timeline.py::test_paused_days_ignore_budget_overrides - R...
+ERROR ../tests/test_timeline.py::test_timezone_conversion_affects_budget_day
+ERROR ../tests/test_timeline.py::test_flights_sorted_alphabetically_each_day
+ERROR ../tests/test_timeline.py::test_daily_spend_caps_enforced - RuntimeErro...
+FAILED ../tests/test_timeline.py::test_inputs_not_mutated - RuntimeError: Nod...
+========================= 1 failed, 8 errors in 0.10s ==========================

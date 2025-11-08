@@ -1,0 +1,126 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.12, pytest-8.2.2, pluggy-1.6.0 -- /usr/local/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /tests
+collecting ... collected 9 items
+
+../tests/test_timeline.py::test_timeline_aligns_with_pause_resume_and_budget_overrides FAILED [ 11%]
+../tests/test_timeline.py::test_end_override_truncates_flight_window FAILED [ 22%]
+../tests/test_timeline.py::test_all_flights_present_each_day_until_end PASSED [ 33%]
+../tests/test_timeline.py::test_multiple_overrides_use_latest_event_per_day FAILED [ 44%]
+../tests/test_timeline.py::test_paused_days_ignore_budget_overrides FAILED [ 55%]
+../tests/test_timeline.py::test_timezone_conversion_affects_budget_day FAILED [ 66%]
+../tests/test_timeline.py::test_flights_sorted_alphabetically_each_day PASSED [ 77%]
+../tests/test_timeline.py::test_daily_spend_caps_enforced FAILED         [ 88%]
+../tests/test_timeline.py::test_inputs_not_mutated PASSED                [100%]
+
+=================================== FAILURES ===================================
+_________ test_timeline_aligns_with_pause_resume_and_budget_overrides __________
+
+timeline = [{'date': '2024-07-01', 'flights': {'flightA': {'budget': 100, 'status': 'active'}}}, {'date': '2024-07-02', 'flights'...atus': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}, 'flightC': {'budget': 80, 'status': 'active'}}}, ...]
+
+    def test_timeline_aligns_with_pause_resume_and_budget_overrides(timeline):
+        """FlightA reflects overrides, pauses, and resumes on the expected calendar days."""
+        entry = _lookup(timeline, "2024-07-01", "flightA")
+        assert entry == {"status": "active", "budget": 100}
+    
+        entry = _lookup(timeline, "2024-07-02", "flightA")
+>       assert entry == {"status": "active", "budget": 90}
+E       AssertionError: assert {'budget': 10...us': 'active'} == {'budget': 90...us': 'active'}
+E         
+E         Omitting 1 identical items, use -vv to show
+E         Differing items:
+E         {'budget': 100} != {'budget': 90}
+E         
+E         Full diff:
+E           {...
+E         
+E         ...Full output truncated (6 lines hidden), use '-vv' to show
+
+/tests/test_timeline.py:73: AssertionError
+__________________ test_end_override_truncates_flight_window ___________________
+
+timeline = [{'date': '2024-07-01', 'flights': {'flightA': {'budget': 100, 'status': 'active'}}}, {'date': '2024-07-02', 'flights'...atus': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}, 'flightC': {'budget': 80, 'status': 'active'}}}, ...]
+
+    def test_end_override_truncates_flight_window(timeline):
+        """FlightB respects an end_override that shortens the scheduled run."""
+>       assert _lookup(timeline, "2024-07-06", "flightB") is None
+E       AssertionError: assert {'budget': 150, 'status': 'active'} is None
+E        +  where {'budget': 150, 'status': 'active'} = _lookup([{'date': '2024-07-01', 'flights': {'flightA': {'budget': 100, 'status': 'active'}}}, {'date': '2024-07-02', 'flights': {'flightA': {'budget': 100, 'status': 'active'}}}, {'date': '2024-07-03', 'flights': {'flightA': {'budget': 100, 'status': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}}}, {'date': '2024-07-04', 'flights': {'flightA': {'budget': 100, 'status': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}}}, {'date': '2024-07-05', 'flights': {'flightA': {'budget': 100, 'status': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}, 'flightC': {'budget': 80, 'status': 'active'}}}, {'date': '2024-07-06', 'flights': {'flightA': {'budget': 100, 'status': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}, 'flightC': {'budget': 80, 'status': 'active'}}}, ...], '2024-07-06', 'flightB')
+
+/tests/test_timeline.py:89: AssertionError
+_______________ test_multiple_overrides_use_latest_event_per_day _______________
+
+timeline = [{'date': '2024-07-01', 'flights': {'flightA': {'budget': 100, 'status': 'active'}}}, {'date': '2024-07-02', 'flights'...atus': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}, 'flightC': {'budget': 80, 'status': 'active'}}}, ...]
+
+    def test_multiple_overrides_use_latest_event_per_day(timeline):
+        """The final budget_override event within a day wins over earlier overrides."""
+        entry = _lookup(timeline, "2024-07-02", "flightA")
+>       assert entry["budget"] == 90
+E       assert 100 == 90
+
+/tests/test_timeline.py:111: AssertionError
+___________________ test_paused_days_ignore_budget_overrides ___________________
+
+timeline = [{'date': '2024-07-01', 'flights': {'flightA': {'budget': 100, 'status': 'active'}}}, {'date': '2024-07-02', 'flights'...atus': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}, 'flightC': {'budget': 80, 'status': 'active'}}}, ...]
+
+    def test_paused_days_ignore_budget_overrides(timeline):
+        """Pause events enforce zero budget even when an override exists the same day."""
+        entry = _lookup(timeline, "2024-07-04", "flightA")
+>       assert entry == {"status": "paused", "budget": 0}
+E       AssertionError: assert {'budget': 10...us': 'active'} == {'budget': 0,...us': 'paused'}
+E         
+E         Differing items:
+E         {'budget': 100} != {'budget': 0}
+E         {'status': 'active'} != {'status': 'paused'}
+E         
+E         Full diff:
+E           {...
+E         
+E         ...Full output truncated (8 lines hidden), use '-vv' to show
+
+/tests/test_timeline.py:117: AssertionError
+_________________ test_timezone_conversion_affects_budget_day __________________
+
+timeline = [{'date': '2024-07-01', 'flights': {'flightA': {'budget': 100, 'status': 'active'}}}, {'date': '2024-07-02', 'flights'...atus': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}, 'flightC': {'budget': 80, 'status': 'active'}}}, ...]
+
+    def test_timezone_conversion_affects_budget_day(timeline):
+        """FlightC adjustments cross time zones and still map to the correct local day."""
+        entry = _lookup(timeline, "2024-07-05", "flightC")
+        assert entry["status"] == "active"
+>       assert entry["budget"] == pytest.approx(46.51, rel=0, abs=1e-2)
+E       assert 80 == 46.51 ± 1.0e-02
+E         
+E         comparison failed
+E         Obtained: 80
+E         Expected: 46.51 ± 1.0e-02
+
+/tests/test_timeline.py:124: AssertionError
+________________________ test_daily_spend_caps_enforced ________________________
+
+timeline = [{'date': '2024-07-01', 'flights': {'flightA': {'budget': 100, 'status': 'active'}}}, {'date': '2024-07-02', 'flights'...atus': 'active'}, 'flightB': {'budget': 150, 'status': 'active'}, 'flightC': {'budget': 80, 'status': 'active'}}}, ...]
+
+    def test_daily_spend_caps_enforced(timeline):
+        """Total spend on capped days does not exceed the configured limit."""
+        day5 = next(entry for entry in timeline if entry["date"] == "2024-07-05")
+        total_day5 = sum(flight["budget"] for flight in day5["flights"].values())
+>       assert total_day5 == pytest.approx(250.0, rel=0, abs=1e-6)
+E       assert 330 == 250.0 ± 1.0e-06
+E         
+E         comparison failed
+E         Obtained: 330
+E         Expected: 250.0 ± 1.0e-06
+
+/tests/test_timeline.py:148: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_timeline.py::test_all_flights_present_each_day_until_end
+PASSED ../tests/test_timeline.py::test_flights_sorted_alphabetically_each_day
+PASSED ../tests/test_timeline.py::test_inputs_not_mutated
+FAILED ../tests/test_timeline.py::test_timeline_aligns_with_pause_resume_and_budget_overrides
+FAILED ../tests/test_timeline.py::test_end_override_truncates_flight_window
+FAILED ../tests/test_timeline.py::test_multiple_overrides_use_latest_event_per_day
+FAILED ../tests/test_timeline.py::test_paused_days_ignore_budget_overrides - ...
+FAILED ../tests/test_timeline.py::test_timezone_conversion_affects_budget_day
+FAILED ../tests/test_timeline.py::test_daily_spend_caps_enforced - assert 330...
+========================= 6 failed, 3 passed in 0.08s ==========================

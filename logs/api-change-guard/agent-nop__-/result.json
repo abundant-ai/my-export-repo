@@ -1,0 +1,78 @@
+{
+    "id": "f1a0e81c-6480-4608-9c34-a1394e522239",
+    "task_name": "api-change-guard",
+    "trial_name": "api-change-guard__7V6wEaf",
+    "trial_uri": "file:///home/runner/_work/nov-5-export/nov-5-export/jobs/2025-11-08__09-35-11/api-change-guard__7V6wEaf",
+    "task_id": {
+        "path": "tasks/api-change-guard"
+    },
+    "source": "tasks",
+    "task_checksum": "89d93d932bcf54e4884812dd327df989044dc45a4d77c88592b283d76c5f7bb0",
+    "config": {
+        "task": {
+            "path": "tasks/api-change-guard",
+            "git_url": null,
+            "git_commit_id": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "tasks"
+        },
+        "trial_name": "api-change-guard__7V6wEaf",
+        "trials_dir": "jobs/2025-11-08__09-35-11",
+        "timeout_multiplier": 1.0,
+        "agent": {
+            "name": "nop",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "kwargs": {}
+        },
+        "environment": {
+            "type": "docker",
+            "force_build": false,
+            "delete": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null
+        },
+        "job_id": "96c33aea-a55f-4ee4-ab5e-9899897d8663"
+    },
+    "agent_info": {
+        "name": "nop",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "output_logprobs": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2025-11-08T09:35:11.146477",
+    "finished_at": "2025-11-08T09:35:35.973070",
+    "environment_setup": {
+        "started_at": "2025-11-08T09:35:11.147446",
+        "finished_at": "2025-11-08T09:35:24.604290"
+    },
+    "agent_setup": {
+        "started_at": "2025-11-08T09:35:24.604322",
+        "finished_at": "2025-11-08T09:35:24.604376"
+    },
+    "agent_execution": {
+        "started_at": "2025-11-08T09:35:24.604395",
+        "finished_at": "2025-11-08T09:35:24.604433"
+    },
+    "verifier": {
+        "started_at": "2025-11-08T09:35:24.604516",
+        "finished_at": "2025-11-08T09:35:25.369908"
+    }
+}

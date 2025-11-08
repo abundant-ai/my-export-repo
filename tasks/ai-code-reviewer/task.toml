@@ -1,0 +1,21 @@
+version = "1.0"
+
+[metadata]
+author_name = "unknown"
+author_email = "unknown"
+difficulty = "hard"
+category = "code-analysis"
+tags = [ "static-analysis", "code-quality", "automation",]
+
+[verifier]
+timeout_sec = 360.0
+
+[agent]
+timeout_sec = 360.0
+
+[environment]
+docker_image = "ghcr.io/abundant-ai/nov-5-export/ai-code-reviewer:pr-93"
+build_timeout_sec = 600.0
+cpus = 1
+memory = "2G"
+storage = "4G"

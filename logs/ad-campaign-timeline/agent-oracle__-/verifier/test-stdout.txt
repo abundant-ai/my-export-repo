@@ -1,0 +1,28 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.12, pytest-8.2.2, pluggy-1.6.0 -- /usr/local/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /tests
+collecting ... collected 9 items
+
+../tests/test_timeline.py::test_timeline_aligns_with_pause_resume_and_budget_overrides PASSED [ 11%]
+../tests/test_timeline.py::test_end_override_truncates_flight_window PASSED [ 22%]
+../tests/test_timeline.py::test_all_flights_present_each_day_until_end PASSED [ 33%]
+../tests/test_timeline.py::test_multiple_overrides_use_latest_event_per_day PASSED [ 44%]
+../tests/test_timeline.py::test_paused_days_ignore_budget_overrides PASSED [ 55%]
+../tests/test_timeline.py::test_timezone_conversion_affects_budget_day PASSED [ 66%]
+../tests/test_timeline.py::test_flights_sorted_alphabetically_each_day PASSED [ 77%]
+../tests/test_timeline.py::test_daily_spend_caps_enforced PASSED         [ 88%]
+../tests/test_timeline.py::test_inputs_not_mutated PASSED                [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_timeline.py::test_timeline_aligns_with_pause_resume_and_budget_overrides
+PASSED ../tests/test_timeline.py::test_end_override_truncates_flight_window
+PASSED ../tests/test_timeline.py::test_all_flights_present_each_day_until_end
+PASSED ../tests/test_timeline.py::test_multiple_overrides_use_latest_event_per_day
+PASSED ../tests/test_timeline.py::test_paused_days_ignore_budget_overrides
+PASSED ../tests/test_timeline.py::test_timezone_conversion_affects_budget_day
+PASSED ../tests/test_timeline.py::test_flights_sorted_alphabetically_each_day
+PASSED ../tests/test_timeline.py::test_daily_spend_caps_enforced
+PASSED ../tests/test_timeline.py::test_inputs_not_mutated
+============================== 9 passed in 0.18s ===============================

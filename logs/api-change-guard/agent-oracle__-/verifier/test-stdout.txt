@@ -1,0 +1,28 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.12, pytest-8.2.2, pluggy-1.6.0 -- /usr/local/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /tests
+collecting ... collected 9 items
+
+../tests/test_outputs.py::test_endpoint_removed_and_semver_major_expected PASSED [ 11%]
+../tests/test_outputs.py::test_additive_requires_minor_but_patch_given PASSED [ 22%]
+../tests/test_outputs.py::test_new_required_param_is_breaking PASSED     [ 33%]
+../tests/test_outputs.py::test_parameter_type_changed_is_breaking PASSED [ 44%]
+../tests/test_outputs.py::test_response_200_removed_is_breaking PASSED   [ 55%]
+../tests/test_outputs.py::test_identical_specs_have_no_violations PASSED [ 66%]
+../tests/test_outputs.py::test_logs_escalate_removed_to_high_severity PASSED [ 77%]
+../tests/test_outputs.py::test_arg_order_independent_and_sorted_output PASSED [ 88%]
+../tests/test_outputs.py::test_violation_shape_contains_required_fields PASSED [100%]
+
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_outputs.py::test_endpoint_removed_and_semver_major_expected
+PASSED ../tests/test_outputs.py::test_additive_requires_minor_but_patch_given
+PASSED ../tests/test_outputs.py::test_new_required_param_is_breaking
+PASSED ../tests/test_outputs.py::test_parameter_type_changed_is_breaking
+PASSED ../tests/test_outputs.py::test_response_200_removed_is_breaking
+PASSED ../tests/test_outputs.py::test_identical_specs_have_no_violations
+PASSED ../tests/test_outputs.py::test_logs_escalate_removed_to_high_severity
+PASSED ../tests/test_outputs.py::test_arg_order_independent_and_sorted_output
+PASSED ../tests/test_outputs.py::test_violation_shape_contains_required_fields
+============================== 9 passed in 0.23s ===============================

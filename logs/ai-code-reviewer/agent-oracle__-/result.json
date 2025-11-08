@@ -1,0 +1,78 @@
+{
+    "id": "73931f6e-c1f5-4938-9c4d-c5ab4da8312b",
+    "task_name": "ai-code-reviewer",
+    "trial_name": "ai-code-reviewer__Vxa2rqt",
+    "trial_uri": "file:///home/runner/_work/nov-5-export/nov-5-export/jobs/2025-11-08__09-34-27/ai-code-reviewer__Vxa2rqt",
+    "task_id": {
+        "path": "tasks/ai-code-reviewer"
+    },
+    "source": "tasks",
+    "task_checksum": "d8c23c3e698f4eb749836a6dde6a7839b5a3e3d3a6459458543818a1339d0436",
+    "config": {
+        "task": {
+            "path": "tasks/ai-code-reviewer",
+            "git_url": null,
+            "git_commit_id": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "tasks"
+        },
+        "trial_name": "ai-code-reviewer__Vxa2rqt",
+        "trials_dir": "jobs/2025-11-08__09-34-27",
+        "timeout_multiplier": 1.0,
+        "agent": {
+            "name": "oracle",
+            "import_path": null,
+            "model_name": null,
+            "override_timeout_sec": null,
+            "kwargs": {}
+        },
+        "environment": {
+            "type": "docker",
+            "force_build": false,
+            "delete": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null
+        },
+        "job_id": "e37f00f8-05fd-45e6-a630-ed89a0e88267"
+    },
+    "agent_info": {
+        "name": "oracle",
+        "version": "1.0.0",
+        "model_info": null
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "output_logprobs": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2025-11-08T09:34:27.857666",
+    "finished_at": "2025-11-08T09:35:02.759640",
+    "environment_setup": {
+        "started_at": "2025-11-08T09:34:27.858266",
+        "finished_at": "2025-11-08T09:34:51.531905"
+    },
+    "agent_setup": {
+        "started_at": "2025-11-08T09:34:51.531946",
+        "finished_at": "2025-11-08T09:34:51.532002"
+    },
+    "agent_execution": {
+        "started_at": "2025-11-08T09:34:51.532028",
+        "finished_at": "2025-11-08T09:34:51.782228"
+    },
+    "verifier": {
+        "started_at": "2025-11-08T09:34:51.782341",
+        "finished_at": "2025-11-08T09:34:52.167642"
+    }
+}

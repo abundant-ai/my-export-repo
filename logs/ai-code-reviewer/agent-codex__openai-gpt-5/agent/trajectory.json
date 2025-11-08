@@ -1,0 +1,27 @@
+{
+  "schema_version": "ATIF-v1.2",
+  "session_id": "019a62d1-c950-71f0-baa9-a6f601eec322",
+  "agent": {
+    "name": "codex",
+    "version": "0.56.0",
+    "model_name": "gpt-5",
+    "extra": {
+      "originator": "codex_exec",
+      "cwd": "/app"
+    }
+  },
+  "steps": [
+    {
+      "step_id": 1,
+      "timestamp": "2025-11-08T09:35:07.110Z",
+      "source": "user",
+      "message": "<environment_context>\n  <cwd>/app</cwd>\n  <approval_policy>never</approval_policy>\n  <sandbox_mode>danger-full-access</sandbox_mode>\n  <network_access>enabled</network_access>\n  <shell>bash</shell>\n</environment_context>"
+    },
+    {
+      "step_id": 2,
+      "timestamp": "2025-11-08T09:35:07.123Z",
+      "source": "user",
+      "message": "Build an advanced code reviewer that analyzes Python files and detects common issues.\n\nDELIVERABLE: Create a Python script named code_reviewer.py that:\n1. Scans all Python files in /app/code_to_review/ directory\n2. Analyzes each file for code quality issues\n3. Outputs a JSON report to /app/code_review.json\n\nThe JSON output MUST follow this exact schema:\n\n{\n  \"overall_score\": <int 1-10>,\n  \"files_reviewed\": <int>,\n  \"total_issues\": <int>,\n  \"complexity_score\": <float 1.0-10.0>,\n  \"maintainability_score\": <float 1.0-10.0>,\n  \"security_score\": <float 1.0-10.0>,\n  \"statistics\": {\n    \"critical\": <int>,\n    \"warning\": <int>,\n    \"suggestion\": <int>,\n    \"avg_cyclomatic_complexity\": <float>,\n    \"max_function_length\": <int>\n  },\n  \"findings\": [\n    {\n      \"file\": <string>,\n      \"line\": <int>,\n      \"severity\": <\"critical\"|\"warning\"|\"suggestion\">,\n      \"category\": <\"security\"|\"performance\"|\"design\"|\"complexity\"|\"style\"|\"maintainability\"|\"error_handling\"|\"syntax\"|\"file_access\"|\"code_smell\">,\n      \"issue\": <string>,\n      \"suggestion\": <string>,\n      \"fix_confidence\": <float 0.0-1.0>,\n      \"complexity_impact\": <\"low\"|\"medium\"|\"high\">\n    }\n  ]\n}\n\nREQUIREMENTS - Your code_reviewer.py must detect:\n- Security vulnerabilities: SQL injection, command injection, hardcoded credentials, dangerous eval/exec\n- Code complexity: Cyclomatic complexity, long functions (>50 lines), deep nesting (>3 levels)\n- Naming conventions: snake_case for functions/variables, PascalCase for classes, UPPER_CASE for constants\n- Code quality: Unused variables, performance anti-patterns (inefficient loops)\n- Maintainability issues: Code smells, lack of error handling\n\nIMPORTANT:\n- You MUST create code_reviewer.py in the current directory\n- The script MUST write output to /app/code_review.json\n- Sample Python files are already available in /app/code_to_review/ for testing\n- Run your code_reviewer.py to generate the output file before tests run\n\n\n"
+    }
+  ]
+}

@@ -1,0 +1,91 @@
+{
+  "timezone": "America/New_York",
+  "dailySpendCaps": {
+    "2024-07-05": 250,
+    "2024-07-07": 120
+  },
+  "flights": [
+    {
+      "id": "flightA",
+      "startDate": "2024-07-01",
+      "endDate": "2024-07-07",
+      "baseBudget": 100
+    },
+    {
+      "id": "flightB",
+      "startDate": "2024-07-03",
+      "endDate": "2024-07-06",
+      "baseBudget": 150
+    },
+    {
+      "id": "flightC",
+      "startDate": "2024-07-05",
+      "endDate": "2024-07-08",
+      "baseBudget": 80
+    }
+  ],
+  "adjustments": [
+    {
+      "flightId": "flightA",
+      "timestamp": "2024-07-02T08:00:00-04:00",
+      "type": "budget_override",
+      "value": 120
+    },
+    {
+      "flightId": "flightA",
+      "timestamp": "2024-07-02T16:30:00-04:00",
+      "type": "budget_override",
+      "value": 90
+    },
+    {
+      "flightId": "flightA",
+      "timestamp": "2024-07-04T04:00:00-04:00",
+      "type": "pause"
+    },
+    {
+      "flightId": "flightA",
+      "timestamp": "2024-07-04T14:00:00-04:00",
+      "type": "budget_override",
+      "value": 400
+    },
+    {
+      "flightId": "flightA",
+      "timestamp": "2024-07-05T09:00:00-04:00",
+      "type": "resume"
+    },
+    {
+      "flightId": "flightA",
+      "timestamp": "2024-07-05T13:05:00-04:00",
+      "type": "budget_override",
+      "value": 200
+    },
+    {
+      "flightId": "flightB",
+      "timestamp": "2024-07-05T00:00:00Z",
+      "type": "end_override",
+      "value": "2024-07-05"
+    },
+    {
+      "flightId": "flightC",
+      "timestamp": "2024-07-05T22:30:00-07:00",
+      "type": "budget_override",
+      "value": 140
+    },
+    {
+      "flightId": "flightC",
+      "timestamp": "2024-07-06T22:10:00-04:00",
+      "type": "pause"
+    },
+    {
+      "flightId": "flightC",
+      "timestamp": "2024-07-07T07:15:00-04:00",
+      "type": "resume"
+    },
+    {
+      "flightId": "flightC",
+      "timestamp": "2024-07-07T23:30:00+09:00",
+      "type": "budget_override",
+      "value": 210
+    }
+  ]
+}

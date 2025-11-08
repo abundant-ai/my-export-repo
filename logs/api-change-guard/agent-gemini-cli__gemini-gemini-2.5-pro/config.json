@@ -1,0 +1,30 @@
+{
+    "task": {
+        "path": "tasks/api-change-guard",
+        "git_url": null,
+        "git_commit_id": null,
+        "overwrite": false,
+        "download_dir": null,
+        "source": "tasks"
+    },
+    "trial_name": "api-change-guard__rjkEhXH",
+    "trials_dir": "jobs/2025-11-08__12-23-35",
+    "timeout_multiplier": 1.0,
+    "agent": {
+        "name": "gemini-cli",
+        "import_path": null,
+        "model_name": "gemini/gemini-2.5-pro",
+        "override_timeout_sec": null,
+        "kwargs": {}
+    },
+    "environment": {
+        "type": "docker",
+        "force_build": false,
+        "delete": true,
+        "kwargs": {}
+    },
+    "verifier": {
+        "override_timeout_sec": null
+    },
+    "job_id": "8b65e3a2-47a9-45b1-8ca8-f13ace0f1be2"
+}

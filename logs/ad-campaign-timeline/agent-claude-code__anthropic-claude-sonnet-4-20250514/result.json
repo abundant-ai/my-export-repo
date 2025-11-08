@@ -1,0 +1,81 @@
+{
+    "id": "f3f0ed18-2f2a-4676-afc4-a76ae5f94b9a",
+    "task_name": "ad-campaign-timeline",
+    "trial_name": "ad-campaign-timeline__7HpwSAw",
+    "trial_uri": "file:///home/runner/_work/nov-5-export/nov-5-export/jobs/2025-11-08__10-49-14/ad-campaign-timeline__7HpwSAw",
+    "task_id": {
+        "path": "tasks/ad-campaign-timeline"
+    },
+    "source": "tasks",
+    "task_checksum": "029aeb7c2828c9faaeeeb632189fdaff8a8200fc673a7e22c95c79622b1ddc95",
+    "config": {
+        "task": {
+            "path": "tasks/ad-campaign-timeline",
+            "git_url": null,
+            "git_commit_id": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "tasks"
+        },
+        "trial_name": "ad-campaign-timeline__7HpwSAw",
+        "trials_dir": "jobs/2025-11-08__10-49-14",
+        "timeout_multiplier": 1.0,
+        "agent": {
+            "name": "claude-code",
+            "import_path": null,
+            "model_name": "anthropic/claude-sonnet-4-20250514",
+            "override_timeout_sec": null,
+            "kwargs": {}
+        },
+        "environment": {
+            "type": "docker",
+            "force_build": false,
+            "delete": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null
+        },
+        "job_id": "5143e599-5d11-4c33-862b-04f99b5ae12f"
+    },
+    "agent_info": {
+        "name": "claude-code",
+        "version": "unknown",
+        "model_info": {
+            "name": "claude-sonnet-4-20250514",
+            "provider": "anthropic"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": 553628,
+        "n_cache_tokens": 552636,
+        "n_output_tokens": 11278,
+        "cost_usd": null,
+        "output_logprobs": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 1.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2025-11-08T10:49:14.519594",
+    "finished_at": "2025-11-08T10:52:47.965209",
+    "environment_setup": {
+        "started_at": "2025-11-08T10:49:14.520179",
+        "finished_at": "2025-11-08T10:50:15.223386"
+    },
+    "agent_setup": {
+        "started_at": "2025-11-08T10:50:15.223416",
+        "finished_at": "2025-11-08T10:50:26.316187"
+    },
+    "agent_execution": {
+        "started_at": "2025-11-08T10:50:26.316214",
+        "finished_at": "2025-11-08T10:52:36.315810"
+    },
+    "verifier": {
+        "started_at": "2025-11-08T10:52:36.315923",
+        "finished_at": "2025-11-08T10:52:37.156893"
+    }
+}

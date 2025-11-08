@@ -1,0 +1,81 @@
+{
+    "id": "0c087cc6-bb31-43d3-acb4-80585216d0e1",
+    "task_name": "ai-code-reviewer",
+    "trial_name": "ai-code-reviewer__tH5Hxd4",
+    "trial_uri": "file:///home/runner/_work/nov-5-export/nov-5-export/jobs/2025-11-08__09-34-27/ai-code-reviewer__tH5Hxd4",
+    "task_id": {
+        "path": "tasks/ai-code-reviewer"
+    },
+    "source": "tasks",
+    "task_checksum": "d8c23c3e698f4eb749836a6dde6a7839b5a3e3d3a6459458543818a1339d0436",
+    "config": {
+        "task": {
+            "path": "tasks/ai-code-reviewer",
+            "git_url": null,
+            "git_commit_id": null,
+            "overwrite": false,
+            "download_dir": null,
+            "source": "tasks"
+        },
+        "trial_name": "ai-code-reviewer__tH5Hxd4",
+        "trials_dir": "jobs/2025-11-08__09-34-27",
+        "timeout_multiplier": 1.0,
+        "agent": {
+            "name": "codex",
+            "import_path": null,
+            "model_name": "openai/gpt-5",
+            "override_timeout_sec": null,
+            "kwargs": {}
+        },
+        "environment": {
+            "type": "docker",
+            "force_build": false,
+            "delete": true,
+            "kwargs": {}
+        },
+        "verifier": {
+            "override_timeout_sec": null
+        },
+        "job_id": "717c6984-f57a-4096-b691-b009f2e9bf14"
+    },
+    "agent_info": {
+        "name": "codex",
+        "version": "unknown",
+        "model_info": {
+            "name": "gpt-5",
+            "provider": "openai"
+        }
+    },
+    "agent_result": {
+        "n_input_tokens": null,
+        "n_cache_tokens": null,
+        "n_output_tokens": null,
+        "cost_usd": null,
+        "output_logprobs": null,
+        "metadata": null
+    },
+    "verifier_result": {
+        "rewards": {
+            "reward": 0.0
+        }
+    },
+    "exception_info": null,
+    "started_at": "2025-11-08T09:34:27.830226",
+    "finished_at": "2025-11-08T09:35:45.023383",
+    "environment_setup": {
+        "started_at": "2025-11-08T09:34:27.830737",
+        "finished_at": "2025-11-08T09:34:50.148588"
+    },
+    "agent_setup": {
+        "started_at": "2025-11-08T09:34:50.148617",
+        "finished_at": "2025-11-08T09:35:06.455976"
+    },
+    "agent_execution": {
+        "started_at": "2025-11-08T09:35:06.456015",
+        "finished_at": "2025-11-08T09:35:33.523942"
+    },
+    "verifier": {
+        "started_at": "2025-11-08T09:35:33.524591",
+        "finished_at": "2025-11-08T09:35:34.279381"
+    }
+}

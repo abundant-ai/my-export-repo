@@ -1,0 +1,99 @@
+============================= test session starts ==============================
+platform linux -- Python 3.12.12, pytest-8.2.2, pluggy-1.6.0 -- /usr/local/bin/python3.12
+cachedir: .pytest_cache
+rootdir: /tests
+collecting ... collected 9 items
+
+../tests/test_outputs.py::test_endpoint_removed_and_semver_major_expected FAILED [ 11%]
+../tests/test_outputs.py::test_additive_requires_minor_but_patch_given FAILED [ 22%]
+../tests/test_outputs.py::test_new_required_param_is_breaking FAILED     [ 33%]
+../tests/test_outputs.py::test_parameter_type_changed_is_breaking FAILED [ 44%]
+../tests/test_outputs.py::test_response_200_removed_is_breaking FAILED   [ 55%]
+../tests/test_outputs.py::test_identical_specs_have_no_violations PASSED [ 66%]
+../tests/test_outputs.py::test_logs_escalate_removed_to_high_severity PASSED [ 77%]
+../tests/test_outputs.py::test_arg_order_independent_and_sorted_output PASSED [ 88%]
+../tests/test_outputs.py::test_violation_shape_contains_required_fields PASSED [100%]
+
+=================================== FAILURES ===================================
+_______________ test_endpoint_removed_and_semver_major_expected ________________
+
+    def test_endpoint_removed_and_semver_major_expected():
+        """removing an endpoint requires a major bump and reports ENDPOINT_REMOVED"""
+        base = INPUT / "sample1" / "baseline.yaml"
+        cand = INPUT / "sample1" / "candidate.yaml"
+        data = run(base, cand)
+        assert has_rule(data, "ENDPOINT_REMOVED"), data
+        sv = get_rule(data, "SEMVER_MISMATCH")
+>       assert sv and "expected major" in sv[0]["message"], data
+E       AssertionError: [{'message': 'Endpoint GET /users was removed', 'method': 'GET', 'object': {'baseline_file': '/app/input/sample1/basel...0', 'candidate_file': '/app/input/sample1/candidate.yaml', 'candidate_version': '1.3.0'}, 'path': 'info.version', ...}]
+E       assert ([{'message': 'Expected major version bump, got minor', 'method': 'N/A', 'object': {'baseline_file': '/app/input/sample1/baseline.yaml', 'baseline_version': '1.2.0', 'candidate_file': '/app/input/sample1/candidate.yaml', 'candidate_version': '1.3.0'}, 'path': 'info.version', ...}] and 'expected major' in 'Expected major version bump, got minor')
+
+/tests/test_outputs.py:35: AssertionError
+_________________ test_additive_requires_minor_but_patch_given _________________
+
+    def test_additive_requires_minor_but_patch_given():
+        """adding an endpoint needs a minor bump; patch-only yields SEMVER_MISMATCH"""
+        base = INPUT / "sample2" / "baseline.yaml"
+        cand = INPUT / "sample2" / "candidate.yaml"
+        data = run(base, cand)
+        assert not has_rule(data, "ENDPOINT_REMOVED"), data
+        assert has_rule(data, "SEMVER_MISMATCH"), data
+        msg = get_rule(data, "SEMVER_MISMATCH")[0]["message"]
+>       assert "expected minor" in msg, data
+E       AssertionError: [{'message': 'Expected minor version bump, got patch', 'method': 'N/A', 'object': {'baseline_file': '/app/input/sample...0', 'candidate_file': '/app/input/sample2/candidate.yaml', 'candidate_version': '1.2.1'}, 'path': 'info.version', ...}]
+E       assert 'expected minor' in 'Expected minor version bump, got patch'
+
+/tests/test_outputs.py:46: AssertionError
+_____________________ test_new_required_param_is_breaking ______________________
+
+    def test_new_required_param_is_breaking():
+        """an optional parameter becoming required is a breaking change"""
+        base = INPUT / "sample3" / "baseline.yaml"
+        cand = INPUT / "sample3" / "candidate.yaml"
+        data = run(base, cand)
+>       assert has_rule(data, "PARAM_REQUIRED_ADDED"), data
+E       AssertionError: []
+E       assert False
+E        +  where False = has_rule([], 'PARAM_REQUIRED_ADDED')
+
+/tests/test_outputs.py:54: AssertionError
+___________________ test_parameter_type_changed_is_breaking ____________________
+
+    def test_parameter_type_changed_is_breaking():
+        """changing a parameter type between versions is a breaking change"""
+        base = INPUT / "sample4" / "baseline.yaml"
+        cand = INPUT / "sample4" / "candidate.yaml"
+        data = run(base, cand)
+        assert has_rule(data, "PARAM_TYPE_CHANGED"), data
+        sv = get_rule(data, "SEMVER_MISMATCH")
+>       assert sv and "expected major" in sv[0]["message"], data
+E       AssertionError: [{'message': "Parameter 'id' type changed from string to integer", 'method': 'GET', 'object': {'baseline_file': '/app/...0', 'candidate_file': '/app/input/sample4/candidate.yaml', 'candidate_version': '1.1.0'}, 'path': 'info.version', ...}]
+E       assert ([{'message': 'Expected major version bump, got minor', 'method': 'N/A', 'object': {'baseline_file': '/app/input/sample4/baseline.yaml', 'baseline_version': '1.0.0', 'candidate_file': '/app/input/sample4/candidate.yaml', 'candidate_version': '1.1.0'}, 'path': 'info.version', ...}] and 'expected major' in 'Expected major version bump, got minor')
+
+/tests/test_outputs.py:66: AssertionError
+____________________ test_response_200_removed_is_breaking _____________________
+
+    def test_response_200_removed_is_breaking():
+        """removing the 200 success response is a breaking change"""
+        base = INPUT / "sample5" / "baseline.yaml"
+        cand = INPUT / "sample5" / "candidate.yaml"
+        data = run(base, cand)
+        assert has_rule(data, "RESPONSE_200_REMOVED"), data
+        sv = get_rule(data, "SEMVER_MISMATCH")
+>       assert sv and "expected major" in sv[0]["message"], data
+E       AssertionError: [{'message': '200 response was removed from GET /items', 'method': 'GET', 'object': {'baseline_file': '/app/input/samp...0', 'candidate_file': '/app/input/sample5/candidate.yaml', 'candidate_version': '0.9.1'}, 'path': 'info.version', ...}]
+E       assert ([{'message': 'Expected major version bump, got patch', 'method': 'N/A', 'object': {'baseline_file': '/app/input/sample5/baseline.yaml', 'baseline_version': '0.9.0', 'candidate_file': '/app/input/sample5/candidate.yaml', 'candidate_version': '0.9.1'}, 'path': 'info.version', ...}] and 'expected major' in 'Expected major version bump, got patch')
+
+/tests/test_outputs.py:76: AssertionError
+==================================== PASSES ====================================
+=========================== short test summary info ============================
+PASSED ../tests/test_outputs.py::test_identical_specs_have_no_violations
+PASSED ../tests/test_outputs.py::test_logs_escalate_removed_to_high_severity
+PASSED ../tests/test_outputs.py::test_arg_order_independent_and_sorted_output
+PASSED ../tests/test_outputs.py::test_violation_shape_contains_required_fields
+FAILED ../tests/test_outputs.py::test_endpoint_removed_and_semver_major_expected
+FAILED ../tests/test_outputs.py::test_additive_requires_minor_but_patch_given
+FAILED ../tests/test_outputs.py::test_new_required_param_is_breaking - Assert...
+FAILED ../tests/test_outputs.py::test_parameter_type_changed_is_breaking - As...
+FAILED ../tests/test_outputs.py::test_response_200_removed_is_breaking - Asse...
+========================= 5 failed, 4 passed in 0.43s ==========================

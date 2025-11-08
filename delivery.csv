@@ -1,0 +1,66 @@
+category,task_name,url,base_repo,instruction,oracle,nop,codex (openai/gpt-5),claude-code (anthropic/claude-sonnet-4-20250514),gemini-cli (gemini/gemini-2.5-pro)
+software-engineering,ad-campaign-timeline,https://github.com/abundant-ai/my-export-repo/tree/main/tasks/ad-campaign-timeline,,"Repair the Node.js campaign timeline generator.
+
+The script in campaign/aggregator.js must expand each flight day by day in the requested timezone while applying operational adjustments. Treat every adjustment timestamp using the provided Olson timezone so that an event influences the matching local calendar day. Apply state transitions cumulatively for each flight: pause or resume modifies all later days until another state change arrives and end_override shortens the schedule so that the specified day becomes the final active date.
+
+Apply budget_override only on the target local day, using the last override recorded for that day, and report zero budget whenever a flight is paused. Respect the optional dailySpendCaps map by proportionally scaling the budgets of active flights so the capped total is not exceeded, while keeping paused flights at zero. Produce timeline entries for every calendar day beginning with the earliest flight start and ending with the latest effective end, listing every flight that is still active or paused on that day.
+
+Emit a deterministic structure: for each day include every flight with an object describing its status (active or paused) and numeric budget, keep the flight identifiers sorted alphabetically, fall back to the base budget when no override is present, and leave the input payload untouched. Implement computeTimeline so that the provided Python tests pass.",PASS,FAIL,FAIL,FAIL,FAIL
+code-analysis,ai-code-reviewer,https://github.com/abundant-ai/my-export-repo/tree/main/tasks/ai-code-reviewer,,"Build an advanced code reviewer that analyzes Python files and detects common issues.
+
+DELIVERABLE: Create a Python script named code_reviewer.py that:
+1. Scans all Python files in /app/code_to_review/ directory
+2. Analyzes each file for code quality issues
+3. Outputs a JSON report to /app/code_review.json
+
+The JSON output MUST follow this exact schema:
+
+{
+  ""overall_score"": <int 1-10>,
+  ""files_reviewed"": <int>,
+  ""total_issues"": <int>,
+  ""complexity_score"": <float 1.0-10.0>,
+  ""maintainability_score"": <float 1.0-10.0>,
+  ""security_score"": <float 1.0-10.0>,
+  ""statistics"": {
+    ""critical"": <int>,
+    ""warning"": <int>,
+    ""suggestion"": <int>,
+    ""avg_cyclomatic_complexity"": <float>,
+    ""max_function_length"": <int>
+  },
+  ""findings"": [
+    {
+      ""file"": <string>,
+      ""line"": <int>,
+      ""severity"": <""critical""|""warning""|""suggestion"">,
+      ""category"": <""security""|""performance""|""design""|""complexity""|""style""|""maintainability""|""error_handling""|""syntax""|""file_access""|""code_smell"">,
+      ""issue"": <string>,
+      ""suggestion"": <string>,
+      ""fix_confidence"": <float 0.0-1.0>,
+      ""complexity_impact"": <""low""|""medium""|""high"">
+    }
+  ]
+}
+
+REQUIREMENTS - Your code_reviewer.py must detect:
+- Security vulnerabilities: SQL injection, command injection, hardcoded credentials, dangerous eval/exec
+- Code complexity: Cyclomatic complexity, long functions (>50 lines), deep nesting (>3 levels)
+- Naming conventions: snake_case for functions/variables, PascalCase for classes, UPPER_CASE for constants
+- Code quality: Unused variables, performance anti-patterns (inefficient loops)
+- Maintainability issues: Code smells, lack of error handling
+
+IMPORTANT:
+- You MUST create code_reviewer.py in the current directory
+- The script MUST write output to /app/code_review.json
+- Sample Python files are already available in /app/code_to_review/ for testing
+- Run your code_reviewer.py to generate the output file before tests run",PASS,FAIL,FAIL,FAIL,FAIL
+software-engineering,api-change-guard,https://github.com/abundant-ai/my-export-repo/tree/main/tasks/api-change-guard,,"Write api-change-guard as a CLI installed at /usr/local/bin/api-change-guard.
+
+Invoke with two OpenAPI inputs plus an optional third logs file. An input may be a spec file or a directory that contains baseline.yaml and candidate.yaml. If both inputs are files, pick the baseline by preferring a filename containing baseline, otherwise choose the lexicographically smaller absolute path. If files are missing or parsing fails, print [] and exit 0.
+
+Read OpenAPI 3. Collect operations by path and method where method is one of GET POST PUT PATCH DELETE HEAD OPTIONS TRACE in uppercase. Compare baseline to candidate and emit violations named ENDPOINT_REMOVED, PARAM_REQUIRED_ADDED, PARAM_TYPE_CHANGED, RESPONSE_200_REMOVED. New operations are additive only and not violations. If logs are supplied as JSON array of objects with path and method, a removed operation that appears there is HIGH severity, otherwise MEDIUM. All other violations are MEDIUM.
+
+Always print a JSON array to stdout. Each item has rule path method message severity and object with absolute baseline_file candidate_file baseline_version candidate_version. Sort by path then method then rule.
+
+Enforce semantic versioning using info.version in x.y.z form. With any breaking violation the candidate must bump major. With no breaking and at least one additive operation it must bump minor. Otherwise patch_or_equal is acceptable. When the observed bump disagrees add one SEMVER_MISMATCH with path info.version method N/A and a message that contains expected major or expected minor or expected patch_or_equal.",PASS,FAIL,FAIL,FAIL,FAIL
